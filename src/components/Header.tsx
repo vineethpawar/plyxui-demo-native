@@ -1,49 +1,53 @@
-import { Pressable, Text, View } from "react-native";
-import { BRAND, FONTS } from "../theme";
+import { Pressable, View } from "react-native";
+import { useTheme } from "@plyxui/styles";
+import { Text, Flex } from "@plyxui/primitives";
+import { FONTS, RADIUS, SPACING } from "../theme";
 import { Avatar } from "./Avatar";
 
 export function Header() {
+  const { colors } = useTheme();
   return (
-    <View
+    <Flex
+      align="center"
+      justify="between"
       style={{
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "space-between",
-        paddingHorizontal: 18,
-        paddingVertical: 14,
+        paddingHorizontal: SPACING.lg,
+        paddingVertical: SPACING.md,
+        backgroundColor: colors.cream,
       }}
     >
       <View>
-        <Text style={{ color: BRAND.inkSoft, fontFamily: FONTS.medium, fontSize: 13 }}>
+        <Text size="sm" style={{ color: colors.inkSoft, fontFamily: FONTS.medium }}>
           Good morning,
         </Text>
-        <Text style={{ color: BRAND.inkStrong, fontFamily: FONTS.bold, fontSize: 18 }}>
+        <Text size="lg" weight="bold" style={{ color: colors.inkStrong, fontFamily: FONTS.bold }}>
           Mithun Roy
         </Text>
       </View>
-      <View style={{ flexDirection: "row", alignItems: "center", gap: 8 }}>
+      <Flex align="center" gap={2}>
         <RoundIconBtn label="Notifications">🔔</RoundIconBtn>
         <Avatar uri="https://i.pravatar.cc/64?img=14" initials="MR" size={40} />
-      </View>
-    </View>
+      </Flex>
+    </Flex>
   );
 }
 
 function RoundIconBtn({ children, label }: { children: React.ReactNode; label: string }) {
+  const { colors } = useTheme();
   return (
     <Pressable
       accessibilityLabel={label}
       style={({ pressed }) => ({
-        backgroundColor: BRAND.card,
+        backgroundColor: colors.card,
         width: 40,
         height: 40,
-        borderRadius: 999,
+        borderRadius: RADIUS.pill,
         alignItems: "center",
         justifyContent: "center",
         opacity: pressed ? 0.7 : 1,
       })}
     >
-      <Text style={{ fontSize: 16 }}>{children}</Text>
+      <Text size="md">{children}</Text>
     </Pressable>
   );
 }
