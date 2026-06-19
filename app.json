@@ -1,0 +1,17 @@
+{
+  "expo": {
+    "name": "plyxui demo",
+    "slug": "plyxui-demo-native",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "automatic",
+    "splash": {
+      "backgroundColor": "#FAF3EC"
+    },
+    "assetBundlePatterns": ["**/*"],
+    "ios": { "supportsTablet": true },
+    "android": { "adaptiveIcon": { "backgroundColor": "#FAF3EC" } },
+    "web": { "bundler": "metro" }
+  }
+}
