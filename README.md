@@ -4,7 +4,7 @@ The React Native sibling of [plyxui-demo](https://github.com/vineethpawar/plyxui
 
 ## Live
 
-- **Expo Snack** (browser preview + QR for device, SDK 54): https://snack.expo.dev/v3K5EDUQ-Ns1I7H2Pv329
+- **Expo Snack** (browser preview + QR for device, SDK 54): https://snack.expo.dev/stydjrFPHliSN1qZxmO4k
 
 > The Snack is a snapshot. If you push changes here and want them reflected, re-run the Snack save API or paste the latest [`App.tsx`](App.tsx) + [`package.json`](package.json) into a fresh Snack at https://snack.expo.dev.
 
