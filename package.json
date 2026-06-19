@@ -14,7 +14,6 @@
     "@expo-google-fonts/montserrat": "^0.4.2",
     "@plyxui/comps": "^0.2.1",
     "@plyxui/core": "^0.2.1",
-    "@plyxui/hooks": "^0.2.1",
     "@plyxui/primitives": "^0.3.1",
     "@plyxui/styles": "^0.2.1",
     "expo": "~54.0.0",

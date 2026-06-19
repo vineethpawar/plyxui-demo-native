@@ -4,22 +4,27 @@
  * the `.native.tsx` files automatically via the `react-native`
  * condition in each package's exports field.
  *
- *   ThemeProvider + ToastProvider wrap the app
+ *   ThemeProvider wraps the app
  *   registerColorTokens adds the cream / peach / yellow palette
- *   Box / Text / Stack / Flex / Image / Divider / Spinner from primitives
- *   Tabs / Toaster from comps
- *   useToast from hooks
+ *   Box / Text / Stack / Flex / Image / Divider from primitives
+ *   Tabs from comps
+ *
+ * Note on feedback UX: the web demo uses @plyxui/hooks ToastProvider +
+ * @plyxui/comps Toaster. On Snack/Metro right now the cross-package
+ * React context doesn't dedup cleanly (each @plyxui/* gets pre-bundled
+ * with its own copy of hooks), so we use RN's native Alert.alert here
+ * instead. Once @plyxui/hooks moves to peerDependencies the bundled
+ * Toaster will dedupe correctly.
  *
  * Open in Expo Snack (browser) or scan the QR with Expo Go on your phone.
  */
 import { useState } from "react";
-import { SafeAreaView, ScrollView, StatusBar, Pressable, StyleSheet, View, Text as RNText } from "react-native";
+import { Alert, SafeAreaView, ScrollView, StatusBar, Pressable, StyleSheet, View, Text as RNText } from "react-native";
 import { useFonts, Montserrat_400Regular, Montserrat_500Medium, Montserrat_600SemiBold, Montserrat_700Bold } from "@expo-google-fonts/montserrat";
 import { registerColorTokens } from "@plyxui/core";
 import { ThemeProvider, useTheme } from "@plyxui/styles";
-import { ToastProvider, useToast } from "@plyxui/hooks";
 import { Box, Text, Stack, Flex, Image, Divider } from "@plyxui/primitives";
-import { Tabs, TabList, Tab, TabPanel, Toaster } from "@plyxui/comps";
+import { Tabs, TabList, Tab, TabPanel } from "@plyxui/comps";
 
 registerColorTokens({
   cream:        { light: "#FAF3EC", dark: "#161412" },
@@ -56,10 +61,7 @@ export default function Root() {
 
   return (
     <ThemeProvider>
-      <ToastProvider>
-        <Shell ready={fontsLoaded} />
-        <Toaster position="bottom" />
-      </ToastProvider>
+      <Shell ready={fontsLoaded} />
     </ThemeProvider>
   );
 }
@@ -182,10 +184,9 @@ function ChatsList() {
 
 function ChatRow({ chat }: { chat: typeof CHATS[number] }) {
   const { colors } = useTheme();
-  const { toast } = useToast();
   return (
     <Pressable
-      onPress={() => toast({ title: chat.name, description: chat.preview, variant: "default" })}
+      onPress={() => Alert.alert(chat.name, chat.preview)}
       style={({ pressed }: { pressed: boolean }) => ({ opacity: pressed ? 0.6 : 1 })}
     >
       <Flex align="center" gap={3} style={{ padding: 10 }}>
